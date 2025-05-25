@@ -1,0 +1,9 @@
+// Form
+.field_with_errors {
+  .form-label {
+    color: $danger;
+  }
+  .form-control {
+    border-color: $danger;
+  }
+}
