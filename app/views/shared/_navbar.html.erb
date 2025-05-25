@@ -13,6 +13,27 @@
           <%= link_to "About", about_path, class: "nav-link #{current_page?(about_path) ? 'text-secondary' : ''}" %>
         </li>
       </ul>
+      <ul class="navbar-nav ms-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.email %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </nav>
