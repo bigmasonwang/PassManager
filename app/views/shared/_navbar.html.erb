@@ -12,6 +12,9 @@
         <li class="nav-item">
           <%= link_to "About", about_path, class: "nav-link #{current_page?(about_path) ? 'text-secondary' : ''}" %>
         </li>
+        <li class="nav-item">
+          <%= link_to "Entries", entries_path, class: "nav-link #{current_page?(entries_path) ? 'text-secondary' : ''}" %>
+        </li>
       </ul>
       <ul class="navbar-nav ms-auto">
         <% if user_signed_in? %>
