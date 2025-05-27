@@ -7,45 +7,26 @@
   </div>
   <% if @entries.any? %>
     <div class="card shadow-sm">
-      <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-          <thead class="bg-light">
-            <tr>
-              <th>Name</th>
-              <th>URL</th>
-              <th>Username</th>
-              <th>Password</th>
-              <th class="text-end">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="list-group list-group-flush rounded h-100 border-end">
             <% @entries.each do |entry| %>
-              <tr>
-                <td><%= entry.name %></td>
-                <td>
-                  <% if entry.url.present? %>
-                    <%= link_to entry.url, entry.url, target: "_blank", class: "text-decoration-none" %>
-                  <% end %>
-                </td>
-                <td><%= entry.username %></td>
-                <td><%= entry.password %></td>
-                <td class="text-end">
-                  <div class="btn-group">
-                    <%= link_to edit_entry_path(entry), class: "btn btn-sm btn-outline-primary" do %>
-                      <i class="bi bi-pencil"></i>
-                    <% end %>
-                    <%= button_to entry_path(entry), 
-                                method: :delete, 
-                                class: "btn btn-sm btn-outline-danger",
-                                form: { data: { turbo_confirm: "Are you sure you want to delete this entry?" } } do %>
-                      <i class="bi bi-trash"></i>
-                    <% end %>
-                  </div>
-                </td>
-              </tr>
+              <%= link_to edit_entry_path(entry), class: "list-group-item list-group-item-action d-flex align-items-center" do %>
+                <% if entry.url.present? %>
+                  <%= image_tag "https://www.google.com/s2/favicons?domain=#{URI.parse(entry.url).host}&sz=32", 
+                  class: "me-2", 
+                  width: 16, 
+                  height: 16, 
+                  onerror: "this.style.display='none'" %>
+                <% end %>
+                <%= entry.name %>
+              <% end %>
             <% end %>
-          </tbody>
-        </table>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <%= render "entry", entry: @entries.first %>
+        </div>
       </div>
     </div>
   <% else %>

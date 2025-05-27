@@ -1,0 +1,42 @@
+<div class="p-3 border-start rounded">
+  <%= form_with(model: entry) do |f| %>
+    <div>
+      <div class="mb-3">
+        <%= f.label :name, class: "form-label" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :url, class: "form-label" %>
+        <div class="input-group">
+          <%= f.url_field :url, class: "form-control" %>
+          <% if entry.url.present? %>
+            <%= link_to entry.url, target: "_blank", class: "btn btn-secondary" do %>
+              <i class="bi bi-box-arrow-up-right"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="mb-3">
+        <%= f.label :username, class: "form-label" %>
+        <%= f.text_field :username, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :password, class: "form-label" %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+        <% if entry.persisted? %>
+          <%= button_to entry_path(entry), 
+                    method: :delete, 
+                    class: "btn btn-outline-danger",
+                    form: { data: { turbo_confirm: "Are you sure you want to delete this entry?" } } do %>
+            <i class="bi bi-trash me-1"></i>Delete
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
